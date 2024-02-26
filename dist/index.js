@@ -122,10 +122,9 @@ with:
                         continue;
                     }
                 }
-                env += `${secrets[key]}\n`;
+                core.setOutput(newKey, secrets[key]);
                 core.info(`Exported secret ${newKey}`);
             }
-            core.setOutput('env', env);
         }
         catch (error) {
             if (error instanceof Error)
