@@ -1,6 +1,6 @@
 name: 'Export all secrets to env variables'
 description: 'Utility action that exports all github secrets to environment variables'
-author: 'Jose Pereira @oNaiPs'
+author: 'Victor smits @victor smits'
 inputs:
   secrets:
     required: true
