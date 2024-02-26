@@ -93,6 +93,7 @@ with:
             }
             core.debug(`Using include list: ${includeList === null || includeList === void 0 ? void 0 : includeList.join(', ')}`);
             core.debug(`Using exclude list: ${excludeList.join(', ')}`);
+            let env = '';
             for (const key of Object.keys(secrets)) {
                 if (includeList && !includeList.some(inc => key.match(new RegExp(inc)))) {
                     continue;
@@ -121,9 +122,10 @@ with:
                         continue;
                     }
                 }
-                core.exportVariable(newKey, secrets[key]);
+                env += `${secrets[key]}\n`;
                 core.info(`Exported secret ${newKey}`);
             }
+            core.setOutput('env', env);
         }
         catch (error) {
             if (error instanceof Error)
