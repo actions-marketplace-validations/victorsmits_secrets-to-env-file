@@ -106,7 +106,11 @@ with:
       env += `${newKey}=${secrets[key]}\n`
       core.info(`Exported secret ${newKey}`)
     }
-    fs.writeFileSync('.env', env, { flag: 'wx' })
+
+    fs.writeFile('.env', env, { flag: 'wx' }, function (err) {
+      if (err) throw err;
+      console.log("It's saved!");
+    });
 
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
