@@ -4,6 +4,7 @@ import {camelCase} from 'camel-case'
 import {constantCase} from 'constant-case'
 import {pascalCase} from 'pascal-case'
 import {snakeCase} from 'snake-case'
+import * as fs from 'fs'
 
 const convertTypes: Record<string, (s: string) => string> = {
   lower: s => s.toLowerCase(),
@@ -101,9 +102,12 @@ with:
         }
       }
 
-      core.setOutput(newKey, secrets[key])
+
+      env += `${newKey}=${secrets[key]}\n`
       core.info(`Exported secret ${newKey}`)
     }
+    fs.writeFileSync('.env', env, { flag: 'wx' })
+
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
