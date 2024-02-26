@@ -109,7 +109,7 @@ with:
 
     fs.writeFile('.env', env, { flag: 'wx' }, function (err) {
       if (err) throw err;
-      console.log("It's saved!");
+      core.info("It's saved!");
     });
 
   } catch (error) {

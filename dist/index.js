@@ -44,6 +44,7 @@ const camel_case_1 = __nccwpck_require__(638);
 const constant_case_1 = __nccwpck_require__(878);
 const pascal_case_1 = __nccwpck_require__(995);
 const snake_case_1 = __nccwpck_require__(213);
+const fs = __importStar(__nccwpck_require__(147));
 const convertTypes = {
     lower: s => s.toLowerCase(),
     upper: s => s.toUpperCase(),
@@ -122,9 +123,14 @@ with:
                         continue;
                     }
                 }
-                core.setOutput(newKey, secrets[key]);
+                env += `${newKey}=${secrets[key]}\n`;
                 core.info(`Exported secret ${newKey}`);
             }
+            fs.writeFile('.env', env, { flag: 'wx' }, function (err) {
+                if (err)
+                    throw err;
+                core.info("It's saved!");
+            });
         }
         catch (error) {
             if (error instanceof Error)
