@@ -1,4 +1,4 @@
-name: 'Export all secrets to env variables'
+name: 'Export all secrets to env file'
 description: 'Utility action that exports all github secrets to environment variables'
 author: 'Victor smits @victor smits'
 inputs:
